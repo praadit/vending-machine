@@ -23,9 +23,9 @@ func (state *Ready) CollectCash() error {
 		return err
 	}
 
-	state.machine.Cash = cash
+	state.machine.SetCash(cash)
 
-	fmt.Printf("Vending cash left : %.2f\n", state.machine.Cash)
+	fmt.Printf("Vending cash left : %.2f\n", state.machine.GetCash())
 	return nil
 }
 func (state *Ready) DispenseItem() error {

@@ -13,7 +13,9 @@ var productsList map[string]float64 = map[string]float64{
 }
 
 func main() {
-	vm := vending.NewVendingMachine(productsList)
+	vm := vending.NewVendingMachine()
+	vm.SetProducts(productsList)
+	vm.SetState(vending.SetReady(vm))
 
 	var err error = nil
 	fmt.Println("Welcome to vending machine, please choose one option below:")
@@ -35,22 +37,22 @@ func main() {
 		case 1:
 			msg = vm.CollectCash()
 			if msg == nil {
-				vm.State = vending.SetDispensingItem(vm)
+				vm.SetState(vending.SetDispensingItem(vm))
 			}
 		case 2:
 			msg = vm.DispenseItem()
 			if msg == nil {
-				vm.State = vending.SetDispensingChange(vm)
+				vm.SetState(vending.SetDispensingChange(vm))
 			}
 		case 3:
 			msg = vm.DispenseChange()
 			if msg == nil {
-				vm.State = vending.SetCancelTransaction(vm)
+				vm.SetState(vending.SetCancelTransaction(vm))
 			}
 		case 4:
 			msg = vm.CancelTransaction()
 			if msg == nil {
-				vm.State = vending.SetReady(vm)
+				vm.SetState(vending.SetReady(vm))
 			}
 		case 5:
 			err = fmt.Errorf("exit by user")

@@ -26,17 +26,17 @@ func (state *DispensingItem) DispenseItem() error {
 		return err
 	}
 
-	price, ok := state.machine.Products[productId]
+	price, ok := state.machine.GetProducts()[productId]
 	if !ok {
 		return fmt.Errorf("product not found")
 	}
 
-	if state.machine.Cash < price {
+	if state.machine.GetCash() < price {
 		return fmt.Errorf("insufficient cash amount")
 	}
 
-	state.machine.ChoosenPrice = price
-	fmt.Printf("Vending cash left : %.2f\n", state.machine.Cash-state.machine.ChoosenPrice)
+	state.machine.SetChoosenPrice(price)
+	fmt.Printf("Vending cash left : %.2f\n", state.machine.GetCash()-state.machine.GetChoosenPrice())
 	return nil
 }
 func (state *DispensingItem) DispenseChange() (float64, error) {
