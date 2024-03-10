@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	vending "github.com/praadit/vending-machine/states"
+	"github.com/praadit/vending-machine/vending"
 )
 
 var productsList map[string]float64 = map[string]float64{
